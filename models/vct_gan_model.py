@@ -158,8 +158,7 @@ class VCTGANModel(BaseModel):
             idt_B = self.idt_B
 
             self.real_A_resize = self.resize(real_A)
-            # real_B = self.resize(real_B)
-            self.real_B_resize = self.resize(real_B)  # 修改了这里，避免覆盖原来的 real_B
+            self.real_B_resize = self.resize(real_B)  
             self.fake_B_resize = self.resize(fake_B)
             self.idt_B_resize = self.resize(idt_B)
 
@@ -208,25 +207,9 @@ class VCTGANModel(BaseModel):
     def compute_D_loss(self):
         """Calculate GAN loss for the discriminator"""
 
-        lambda_D_ViT = self.opt.lambda_D_ViT
-        fake_B_tokens = self.mutil_fake_B_tokens[self.opt.which_D_layer].detach()
-
-        real_B_tokens = self.mutil_real_B_tokens[self.opt.which_D_layer]
-
-        fake_B_tokens = self.cat_results(fake_B_tokens, self.opt.adj_size_list)
-
-        real_B_tokens = self.cat_results(real_B_tokens, self.opt.adj_size_list)
-
-        pre_fake_ViT = self.netD_ViT(fake_B_tokens)
-
-        self.loss_D_fake_ViT = self.criterionGAN(pre_fake_ViT, False).mean() * lambda_D_ViT
-
-        pred_real_ViT = self.netD_ViT(real_B_tokens)
-        self.loss_D_real_ViT = self.criterionGAN(pred_real_ViT, True).mean() * lambda_D_ViT
-
-        self.loss_D_ViT = (self.loss_D_fake_ViT + self.loss_D_real_ViT) * 0.5
-
-        return self.loss_D_ViT
+       """
+        This part will be made available after being processed.
+        """
 
 
     def compute_G_loss(self):
@@ -239,11 +222,6 @@ class VCTGANModel(BaseModel):
             self.loss_G_GAN_ViT = self.criterionGAN(pred_fake_ViT, True) * self.opt.lambda_GAN
         else:
             self.loss_G_GAN_ViT = 0.0
-
-        # if self.opt.lambda_global > 0.0 or self.opt.lambda_spatial > 0.0:
-        #     self.loss_global, self.loss_spatial = self.calculate_attention_loss()
-        # else:
-        #     self.loss_global, self.loss_spatial = 0.0, 0.0
 
         if self.opt.lambda_NCE > 0.0:
             self.loss_NCE = self.calculate_NCE_loss(self.mutil_real_A_tokens, self.mutil_fake_B_tokens)
