@@ -53,8 +53,6 @@ fidelity --gpu 0 --kid --input1  ./results/vct_gan_name/test_latest/images/fake_
 
 ### Reference Links
 ```
-https://github.com/Tracygc/AECM
 https://github.com/BIT-DA/ROMA
-https://github.com/silver-hzh/DR-AVIT
 https://github.com/silver-hzh/USTNet
 ```
