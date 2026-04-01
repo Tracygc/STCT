@@ -33,7 +33,7 @@ pip install Tensorboard (TensorboardX, Pyyaml, Pillow, dominate, visdom, einops,
 ### Python
 ```
 # Train for video mode
-CUDA_VISIBLE_DEVICES=0 python train.py --dataroot /path --name vct_gan_name --dataset_mode unaligned_double --no_flip --local_nums 64 --display_env AECM_env --model vct_gan_double --lambda_D_ViT 1.0 --lambda_GAN 1.0 --lambda_global 5.0 --lambda_NCE 0.1 --lambda_temporal 10.0 --side_length 7  --atten_layers 3,5,7 --lr 0.00001
+CUDA_VISIBLE_DEVICES=0 python train.py --dataroot /path --name vct_gan_name --dataset_mode unaligned_double --no_flip --local_nums 64 --display_env AECM_env --model vct_gan_double --lambda_D_ViT 1.0 --lambda_GAN 1.0 --lambda_global 5.0 --lambda_NCE 0.1 --lambda_temporal 0.1 --side_length 7  --atten_layers 3,5,7 --lr 0.00001
 
 # Train for image mode
 CUDA_VISIBLE_DEVICES=0 python train.py --dataroot /path --name vct_gan_name --dataset_mode unaligned --local_nums 64 --display_env AECM_env --model vct_gan  --lambda_D_ViT 1.0 --lambda_GAN 1.0 --lambda_global 5.0 --lambda_NCE 0.1 --side_length 7 --atten_layers 3,5,7 --lr 0.00001
