@@ -478,26 +478,7 @@ class VCTGANPPModel(BaseModel):
         return tokens[:, token_ids, :]
 
     def tokens_concat(self, origin_tokens, adjacent_size):
-        adj_size = adjacent_size
-        batch, token_num, channels = origin_tokens.shape[0], origin_tokens.shape[1], origin_tokens.shape[2]
-        side = int(math.sqrt(token_num))
-        if side * side != token_num:
-            print('Error! Not a square!')
-        token_map = origin_tokens.clone().reshape(batch, side, side, channels)
-        cut_patch_list = []
-        for i in range(0, side, adj_size):
-            for j in range(0, side, adj_size):
-                i_left = i
-                i_right = i + adj_size + 1 if i + adj_size <= side else side + 1
-                j_left = j
-                j_right = j + adj_size if j + adj_size <= side else side + 1
-
-                cut_patch = token_map[:, i_left:i_right, j_left:j_right, :]
-                cut_patch = cut_patch.reshape(batch, -1, channels)
-                cut_patch = torch.mean(cut_patch, dim=1, keepdim=True)
-                cut_patch_list.append(cut_patch)
-
-        return torch.cat(cut_patch_list, dim=1)
+       "The code will be released soon."
 
     def cat_results(self, origin_tokens, adj_size_list):
         res_list = [origin_tokens]
