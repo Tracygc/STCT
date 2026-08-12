@@ -1,5 +1,5 @@
 ### STCT
-STCT: Structure-Aware Token Contrastive Translation for Unpaired Infrared-to-Visible Traffic Scenes
+STCT: Structure-Aware Token Contrastive Infrared-to-Visible Translation for Cross-Spectral Visual Measurement
 
 
 ### Availability of Datasets
